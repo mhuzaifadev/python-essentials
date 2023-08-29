@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Ticketing System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Movie Ticketing System</h1>
+
+    <!-- Search Movie Form -->
+    <h2>Search Movie</h2>
+    <form action="/search_movie" method="post">
+        <label for="name">Movie Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- Display Found Movies -->
+    {% if movies %}
+        <h2>Found Movies:</h2>
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    {{ movie.name }}
+                    <!-- Link to view movie details -->
+                    <a href="#" onclick="showDetails('{{ movie.name }}')">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Display Movie Details -->
+    <div id="movie-details"></div>
+
+    <!-- Book Seat Form -->
+    <h2>Book Seat</h2>
+    <form action="/book_seat" method="post">
+        <label for="movie_name">Movie Name:</label>
+        <input type="text" id="movie_name" name="movie_name" required><br>
+        <label for="timing">Timing:</label>
+        <input type="text" id="timing" name="timing" required><br>
+        <label for="seat">Seat (e.g. A2):</label>
+        <input type="text" id="seat" name="seat" required><br>
+        <input type="submit" value="Book Seat">
+    </form>
+
+    {% if ticket_id %}
+        <h2>Your Ticket ID:</h2>
+        <p>{{ ticket_id }}</p>
+    {% endif %}
+
+    <!-- Script to Show Movie Details -->
+    <script>
+        function showDetails(movieName) {
+            $.get(`/view_movie_details/${movieName}`, function(data) {
+                $('#movie-details').html(data);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Welcome to the Admin Panel</h1>
+
+    <h2>Search Ticket by ID</h2>
+    <form action="/view_ticket" method="get">
+        <label for="ticket_id">Ticket ID:</label>
+        <input type="text" id="ticket_id" name="ticket_id" required><br>
+        <input type="submit" value="Search Ticket">
+    </form>
+
+    <h2>Add Movie</h2>
+    <form action="/add_movie" method="post">
+        <label for="name">Movie Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" required><br>
+        <label for="cinema_number">Cinema Number:</label>
+        <input type="number" id="cinema_number" name="cinema_number" required><br>
+        <input type="submit" value="Add Movie">
+    </form>
+
+    <h2>Add Cinema</h2>
+    <form action="/add_cinema" method="post">
+        <label for="rows">Number of Rows:</label>
+        <input type="number" id="rows" name="rows" required><br>
+        <label for="seats_per_row">Seats Per Row:</label>
+        <input type="number" id="seats_per_row" name="seats_per_row" required><br>
+        <label for="seats_per_row">Cinema Number:</label>
+        <input type="number" id="seats_per_row" name="seats_per_row" required><br>
+        <input type="submit" value="Add Cinema">
+    </form>
+
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% endif %}
+
+    {% if added_movie %}
+        <h2>Added Movie Details:</h2>
+        <p>Name: {{ added_movie.name }}</p>
+        <!-- ... Other details ... -->
+    {% endif %}
+    {% if added_cinema %}
+        <h2>Added Cinema Details:</h2>
+        <p>Number: {{ added_cinema.number }}</p>
+        <!-- ... Other details ... -->
+    {% endif %}
+
+
+</body>
+</html>
